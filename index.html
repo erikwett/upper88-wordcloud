@@ -13,9 +13,10 @@
     <link rel="import" href="upper88-wordcloud.html">
     <style>
         upper88-wordcloud {
-            height: 300px;
-            width: 50em;
-            //background-color: '#ffe0e0';
+            height: 600px;
+            width: 600px;
+            background-color: #ffe0e0;
+            position:absolute;
             //border-color: black;
             //border-style: solid;
             //border-width: 1px;
@@ -26,7 +27,9 @@
 <body>
     <h1>upper88-wordcloud demo</h1>
     <!-- Runs custom element -->
-    <upper88-wordcloud data='[["Month", "Days"], ["Jan", 31], ["Feb", 28], ["Mar", 31]]'>
+    <!--upper88-wordcloud data='[["Country", "Gold Medals"], ["Jan", 31], ["Feb", 28], ["Mar", 31]]'>
+    </upper88-wordcloud-->
+    <upper88-wordcloud data='[["Country", "Gold Medals"], ["Kenya", 7], ["Jamaica", 7], ["United States", 6], ["Great Britain", 4], ["Ethiopia", 3], ["Poland", 3], ["Canada", 2], ["Germany", 2], ["Russia", 2], ["Cuba", 2]]'>
     </upper88-wordcloud>
 
 </body>
