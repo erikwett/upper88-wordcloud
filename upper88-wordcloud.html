@@ -1,0 +1,85 @@
+<!--
+`upper88-wordclod` Displays a Word Cloud in a custom HTML element
+
+    <upper88-wordclod
+      options='{"title": "Distribution of days in 2001Q1"}'
+      cols='[{"label":"Month", "type":"string"}, {"label":"Days", "type":"number"}]'
+      rows='[["Jan", 31],["Feb", 28],["Mar", 31]]'>
+    </upper88-wordclod>
+
+Height and width are specified as style attributes:
+
+    upper88-wordclod {
+      height: 300px;
+      width: 50em;
+    }
+
+Data can be provided in one of three ways:
+
+- Via the `cols` and `rows` attributes:
+
+      cols='[{"label":"Mth", "type":"string"}, {"label":"Days", "type":"number"}]'
+      rows='[["Jan", 31],["Feb", 28],["Mar", 31]]'
+
+- Via the `data` attribute, passing in the data directly:
+
+      data='[["Month", "Days"], ["Jan", 31], ["Feb", 28], ["Mar", 31]]'
+
+- Via the `data` attribute, passing in the URL to a resource containing the
+  data, in JSON format:
+
+      data='http://example.com/chart-data.json'
+@demo
+-->
+<script src="bower_components/wordcloud2.js/src/wordcloud2.js"></script>
+<script>
+    (function() {
+        var element = Object.create(HTMLElement.prototype);
+
+        element.createdCallback = function() {
+            init(this);
+        };
+
+        element.attachedCallback = function() {
+            render(this);
+        };
+
+        element.detachedCallback = function() {};
+
+        element.attributeChangedCallback = function(attr, oldVal, newVal) {
+            render(this);
+        };
+
+        // Registers custom element
+        document.registerElement('upper88-wordcloud', {
+            prototype: element
+        });
+        //implementation
+        function init(element) {
+            //sets up the custom element
+            var shadow = element.createShadowRoot();
+            element.canvas = document.createElement('canvas');
+            shadow.appendChild(element.canvas);
+            //element.div = document.createElement('div');
+            //shadow.appendChild(element.div);
+        }
+
+        function render(element) {
+            var rows, cols;
+            if (element.hasAttribute("rows")) {
+                rows = JSON.parse(element.getAttribute("rows"));
+                if (element.hasAttribute("cols")) {
+                    cols = JSON.parse(element.getAttribute("cols"));
+                }
+            } else if (element.hasAttribute("data")) {
+                rows = JSON.parse(element.getAttribute("data"));
+                cols = rows.splice(0, 1);
+            }
+            WordCloud(element.canvas, {
+                list: rows,
+                rotateRatio: 0.5
+            });
+            
+        }
+    }());
+</script>
