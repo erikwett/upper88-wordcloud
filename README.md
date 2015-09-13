@@ -2,7 +2,7 @@
 
 > Word Cloud custom element
 >
-> Work in progress, not really ready yet
+> Work in progress, not really ready yet, but try it out and give your feedback!
 >
 
 
@@ -51,8 +51,13 @@ options       | *Object*    |              | Options. Current options are: maxFo
 
 ## History
 
-For detailed changelog, check [Releases](https://github.com/erikwett/upper88-wordcloud/releases).
+For detailed changelog, check [Releases](https://github.com/erikwett/upper88-wordcloud/releases). (Not much there yet...)
+
+## Library used
+[wordcloud2.js](https://github.com/timdream/wordcloud2.js) - word cloud library by [timdream](https://github.com/timdream).
 
 ## License
 
-[MIT License](http://opensource.org/licenses/MIT)
+[MIT License](http://opensource.org/licenses/MIT) - so go ahead and use it!!
+
+
