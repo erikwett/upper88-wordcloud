@@ -31,32 +31,22 @@ Or [download as ZIP](https://github.com/erikwett/upper88-wordcloud/archive/maste
 2. Import custom element:
 
     ```html
-    <link rel="import" href="bower_components/upper88-wordcloud/my-element.html">
+    <link rel="import" href="bower_components/upper88-wordcloud/upper88-wordcloud.html">
     ```
 
 3. Start using it!
 
     ```html
-    <upper88-wordcloud></upper88-wordcloud>
+    <upper88-wordcloud rows='[["Kenya", 7], ["Jamaica", 7], ["United States", 6], ["Great Britain", 4], ["Ethiopia", 3], ["Poland", 3], ["Canada", 2], ["Germany", 2], ["Russia", 2], ["Cuba", 2]]'></upper88-wordcloud>
     ```
 
 ## Options
 
 Attribute     | Options     | Default      | Description
 ---           | ---         | ---          | ---
-`rows`        | *string*    | `bar`        | Lorem ipsum dolor.
-
-## Methods
-
-Method        | Parameters   | Returns     | Description
----           | ---          | ---         | ---
-`unicorn()`   | None.        | Nothing.    | Magic stuff appears.
-
-## Events
-
-Event         | Description
----           | ---
-`onsomething` | Triggers when something happens.
+rows          | *Array*     | none         | An array of arrays. First value in each array is the text,
+              |             |              |  second is the value
+options       | *Object*    |              | Options. Current options are: maxFont (default 24), minFont (default 12)
 
 
 ## History

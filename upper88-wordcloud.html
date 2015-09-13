@@ -2,33 +2,22 @@
 `upper88-wordclod` Displays a Word Cloud in a custom HTML element
 
     <upper88-wordclod
-      options='{"title": "Distribution of days in 2001Q1"}'
-      cols='[{"label":"Month", "type":"string"}, {"label":"Days", "type":"number"}]'
-      rows='[["Jan", 31],["Feb", 28],["Mar", 31]]'>
+      options='{"maxFont":60}'
+      rows='[["Kenya", 7], ["Jamaica", 7], ["United States", 6], ["Great Britain", 4], ["Ethiopia", 3], ["Poland", 3], ["Canada", 2], ["Germany", 2], ["Russia", 2], ["Cuba", 2]]'>
     </upper88-wordclod>
 
 Height and width are specified as style attributes:
 
     upper88-wordclod {
       height: 300px;
-      width: 50em;
+      width: 500px;
     }
 
-Data can be provided in one of three ways:
+Data is provided Via the `rows` attribute:
 
-- Via the `cols` and `rows` attributes:
+     rows='[["Kenya", 7], ["Jamaica", 7], ["United States", 6], ["Great Britain", 4], ["Ethiopia", 3], ["Poland", 3], ["Canada", 2], ["Germany", 2], ["Russia", 2], ["Cuba", 2]]'
+Each row should have a text as the first value and a number as the second.
 
-      cols='[{"label":"Mth", "type":"string"}, {"label":"Days", "type":"number"}]'
-      rows='[["Jan", 31],["Feb", 28],["Mar", 31]]'
-
-- Via the `data` attribute, passing in the data directly:
-
-      data='[["Month", "Days"], ["Jan", 31], ["Feb", 28], ["Mar", 31]]'
-
-- Via the `data` attribute, passing in the URL to a resource containing the
-  data, in JSON format:
-
-      data='http://example.com/chart-data.json'
 @demo
 -->
 <script src="bower_components/wordcloud2.js/src/wordcloud2.js"></script>
@@ -44,8 +33,10 @@ Data can be provided in one of three ways:
 			var me = this;
 			window.addEventListener("resize", function() {
 				render(me);
-			})
-			render(this);
+			});
+			setTimeout(function() {
+				render(me);
+			}, 100);
 		};
 
 		element.detachedCallback = function() {};
@@ -65,13 +56,11 @@ Data can be provided in one of three ways:
 			element.root = document.createElement('div');
 			element.root.setAttribute("style", "width:100%;height:100%;");
 			shadow.appendChild(element.root);
-			element.canvas = document.createElement('canvas');
-			element.canvas.setAttribute("style", "width:100%;height:100%;");
-			element.root.appendChild(element.canvas);
 		}
 
 		function render(element) {
-			var rows, cols;
+			var w = window.getComputedStyle(element).getPropertyValue("width");
+			var rows, cols, options;
 			if (element.hasAttribute("rows")) {
 				rows = JSON.parse(element.getAttribute("rows"));
 				if (element.hasAttribute("cols")) {
@@ -81,24 +70,40 @@ Data can be provided in one of three ways:
 				rows = JSON.parse(element.getAttribute("data"));
 				cols = rows.splice(0, 1);
 			}
-			element.canvas.width = 500;
-			element.canvas.height = 500;
-			//step 0: sortera
-			//step 1: beräkna storlek för element
-			//step 2: placera
-           
-			WordCloud(element.canvas, {
-				list: rows,
+			if (element.hasAttribute("options")) {
+				options = JSON.parse(element.getAttribute("options"));
+			} else {
+				options = {};
+			}
+			options.maxFont = options.maxFont || 24;
+			options.minFont = options.minFont || 12;
+			//sortera
+			var list = rows.sort(function(a, b) {
+				if (a[1] === b[1]) {
+					return b[0].length - a[0].length;
+				}
+				return b[1] - a[1];
+			});
+			//
+			var maxVal = rows[0][1],
+				minVal = rows[rows.length - 1][1],
+				szFactor = (options.maxFont - options.minFont) / (maxVal - minVal);
+
+			WordCloud(element.root, {
+				list: list,
 				rotateRatio: 1.0,
-                shape: "square",
-                //TODO:size...
-                //TODO:bryt vid ej plats
+				shape: "square",
+				backgroundColor: "transparent",
 				weightFactor: function(size) {
-					return size * 12;
-				},
-                abort:function(err){
-                    console.log("aborted",err);
-                }
+					if (size === maxVal) {
+						return options.maxFont;
+					}
+					if (size === minVal) {
+						return options.minFont;
+					}
+					var sz = Math.trunc((size - minVal) * szFactor) + options.minFont;
+					return sz;
+				}
 			});
 
 		}
