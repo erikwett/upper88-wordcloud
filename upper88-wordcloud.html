@@ -31,15 +31,14 @@ Each row should have a text as the first value and a number as the second.
 
 		element.attachedCallback = function() {
 			var me = this;
-			window.addEventListener("resize", function() {
-				render(me);
-			});
-			setTimeout(function() {
-				render(me);
-			}, 100);
+            me.redraw = function(){render(me);};
+			window.addEventListener("resize", me.redraw);
+			setTimeout(me.redraw, 100);
 		};
 
-		element.detachedCallback = function() {};
+		element.detachedCallback = function() {
+            window.removeEventListener("resize",this.redraw);
+        }
 
 		element.attributeChangedCallback = function(attr, oldVal, newVal) {
 			render(this);

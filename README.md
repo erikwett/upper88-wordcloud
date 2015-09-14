@@ -44,8 +44,7 @@ Or [download as ZIP](https://github.com/erikwett/upper88-wordcloud/archive/maste
 
 Attribute     | Options     | Default      | Description
 ---           | ---         | ---          | ---
-rows          | *Array*     | none         | An array of arrays. First value in each array is the text,
-              |             |              |  second is the value
+rows          | *Array*     | none         | An array of arrays. First value in each array is the text,second is the value
 options       | *Object*    |              | Options. Current options are: maxFont (default 24), minFont (default 12)
 
 
