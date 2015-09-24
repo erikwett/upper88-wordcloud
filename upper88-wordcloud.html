@@ -20,7 +20,7 @@ Each row should have a text as the first value and a number as the second.
 
 @demo
 -->
-<script src="bower_components/wordcloud2.js/src/wordcloud2.js"></script>
+<script src="../wordcloud2.js/src/wordcloud2.js"></script>
 <script>
 	(function() {
 		var element = Object.create(HTMLElement.prototype);
@@ -31,20 +31,24 @@ Each row should have a text as the first value and a number as the second.
 
 		element.attachedCallback = function() {
 			var me = this;
-            me.redraw = function(){render(me);};
+			me.redraw = function() {
+				render(me);
+			};
 			window.addEventListener("resize", me.redraw);
 			setTimeout(me.redraw, 100);
 		};
 
 		element.detachedCallback = function() {
-            window.removeEventListener("resize",this.redraw);
-        }
+			window.removeEventListener("resize", this.redraw);
+		}
 
 		element.attributeChangedCallback = function(attr, oldVal, newVal) {
 			render(this);
 		};
-
-		// Registers custom element
+		element.drawChart = function() {
+            render(this);
+        }
+			// Registers custom element
 		document.registerElement('upper88-wordcloud', {
 			prototype: element
 		});
@@ -68,6 +72,9 @@ Each row should have a text as the first value and a number as the second.
 			} else if (element.hasAttribute("data")) {
 				rows = JSON.parse(element.getAttribute("data"));
 				cols = rows.splice(0, 1);
+			}
+			if (!rows) {
+				return;
 			}
 			if (element.hasAttribute("options")) {
 				options = JSON.parse(element.getAttribute("options"));

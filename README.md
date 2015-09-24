@@ -2,7 +2,6 @@
 
 > Word Cloud custom element
 >
-> Work in progress, not really ready yet, but try it out and give your feedback!
 >
 
 
@@ -47,16 +46,21 @@ Attribute     | Options     | Default      | Description
 rows          | *Array*     | none         | An array of arrays. First value in each array is the text,second is the value
 options       | *Object*    |              | Options. Current options are: maxFont (default 24), minFont (default 12)
 
+## Methods
+
+Method        | Returns | Description
+---           | ---
+drawChart()   | Returns null.| Draws the chart. Called automatically on first load and whenever one of the attributes changes. Can be called manually to handle e.g. page resizes, tab navigation etc.
 
 ## History
 
-For detailed changelog, check [Releases](https://github.com/erikwett/upper88-wordcloud/releases). (Not much there yet...)
+For detailed changelog, check [Releases](https://github.com/erikwett/upper88-wordcloud/releases). 
 
 ## Library used
 [wordcloud2.js](https://github.com/timdream/wordcloud2.js) - word cloud library by [timdream](https://github.com/timdream).
 
 ## License
 
-[MIT License](http://opensource.org/licenses/MIT) - so go ahead and use it!!
+[MIT License](http://opensource.org/licenses/MIT) 
 
 
