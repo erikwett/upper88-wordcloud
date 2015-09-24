@@ -7,7 +7,7 @@
 
 ## Demo
 
-[Check it live!] not yet...
+[Check it live!](http://upper88.com/#!/wordcloud) 
 
 ## Install
 
