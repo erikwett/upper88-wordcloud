@@ -48,8 +48,8 @@ options       | *Object*    |              | Options. Current options are: maxFo
 
 ## Methods
 
-Method        | Returns | Description
----           | ---
+Method        | Returns      | Description
+---           | ---          | ---
 drawChart()   | Returns null.| Draws the chart. Called automatically on first load and whenever one of the attributes changes. Can be called manually to handle e.g. page resizes, tab navigation etc.
 
 ## History
