@@ -1,6 +1,6 @@
 {
     "name": "upper88-wordcloud",
-    "version": "0.1.2beta",
+    "version": "0.1.2",
     "description": "Word Cloud Custom Element",
     "license": "MIT",
     "main": "upper88-wordcloud.html",
